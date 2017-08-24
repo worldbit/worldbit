@@ -1,12 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Dash
-Comment=Dash P2P Cryptocurrency
-Comment[fr]=Dash, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=Dash, eşten eşe kriptografik sanal para birimi
-Exec=dash-qt %u
+Name=Worldbit
+Comment=Worldbit P2P Cryptocurrency
+Comment[fr]=Worldbit, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Worldbit, eşten eşe kriptografik sanal para birimi
+Exec=worldbit-qt %u
 Terminal=false
 Type=Application
-Icon=dash128
-MimeType=x-scheme-handler/dash;
+Icon=worldbit128
+MimeType=x-scheme-handler/worldbit;
 Categories=Office;Finance;

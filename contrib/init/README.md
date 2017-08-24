@@ -1,11 +1,11 @@
 Sample configuration files for:
 
-SystemD: dashd.service
-Upstart: dashd.conf
-OpenRC:  dashd.openrc
-         dashd.openrcconf
-CentOS:  dashd.init
-OS X:    org.dash.dashd.plist
+SystemD: worldbitd.service
+Upstart: worldbitd.conf
+OpenRC:  worldbitd.openrc
+         worldbitd.openrcconf
+CentOS:  worldbitd.init
+OS X:    org.worldbit.worldbitd.plist
 
 have been made available to assist packagers in creating node packages here.
 
