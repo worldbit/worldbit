@@ -28,9 +28,11 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     txNew.vout[0].scriptPubKey = genesisOutputScript;
 
     CBlock genesis;
-    genesis.nTime    = nTime;
+    //genesis.nTime    = nTime;
+	genesis.nTime    = 1503604154;
     genesis.nBits    = nBits;
-    genesis.nNonce   = nNonce;
+    //genesis.nNonce   = nNonce;
+	genesis.nNonce   = 0;
     genesis.nVersion = nVersion;
     genesis.vtx.push_back(txNew);
     genesis.hashPrevBlock.SetNull();
@@ -42,14 +44,14 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  * Build the genesis block. Note that the output of its generation
  * transaction cannot be spent since it did not originally exist in the
  * database.
- */
+ *
  // CBlock(hash=00000ffd590b14, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=e0028e, nTime=1503604154, nBits=1e0ffff0, nNonce=28917698, vtx=1)
   CBlock(hash=00000ffd590b14, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=e0028e, nTime=1503604154, nBits=1e0ffff0, nNonce=0, vtx=1)
     CTransaction(hash=e0028e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
       CTxIn(COutPoint(000000, -1), coinbase 04ffff001d01044c5957697265642030392f4a616e2f3230313420546865204772616e64204578706572696d656e7420476f6573204c6976653a204f76657273746f636b2e636f6d204973204e6f7720416363657074696e6720426974636f696e73)
       CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
     vMerkleTree: e0028e
- 
+ */
  
  
  
