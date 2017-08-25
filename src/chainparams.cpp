@@ -1,6 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The Worldbit Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2017 The Worldbit Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -28,11 +29,11 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     txNew.vout[0].scriptPubKey = genesisOutputScript;
 
     CBlock genesis;
-    //genesis.nTime    = nTime;
-	genesis.nTime    = 1503604154;
+    genesis.nTime    = nTime;
+	//genesis.nTime    = 1503604154;
     genesis.nBits    = nBits;
-    //genesis.nNonce   = nNonce;
-	genesis.nNonce   = 0;
+    genesis.nNonce   = nNonce;
+	//genesis.nNonce   = 0;
     genesis.nVersion = nVersion;
     genesis.vtx.push_back(txNew);
     genesis.hashPrevBlock.SetNull();
@@ -95,8 +96,8 @@ public:
         consensus.nMajorityEnforceBlockUpgrade = 750;
         consensus.nMajorityRejectBlockOutdated = 950;
         consensus.nMajorityWindow = 1000;
-        consensus.BIP34Height = 227931;
-        consensus.BIP34Hash = uint256S("0x00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6");
+        consensus.BIP34Height = -1;
+        consensus.BIP34Hash = uint256S("0x0");
         consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
         consensus.nPowTargetTimespan = 24 * 60 * 60; // Worldbit: 1 day
         consensus.nPowTargetSpacing = 2.5 * 60; // Worldbit: 2.5 minutes
@@ -134,22 +135,14 @@ public:
 
 
         vSeeds.push_back(CDNSSeedData("worldbit.org", "dnsseed.worldbit.org"));
-//        vSeeds.push_back(CDNSSeedData("worldbitdot.io", "dnsseed.worldbitdot.io"));
-//        vSeeds.push_back(CDNSSeedData("masternode.io", "dnsseed.masternode.io"));
-//        vSeeds.push_back(CDNSSeedData("worldbit.io", "dnsseed.worldbit.io"));
 
-        // Worldbit addresses start with 'W'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,73);
-        // Worldbit script addresses start with '3'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
-        // Worldbit private keys start with '7' or 'X'
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,204);
-        // Worldbit BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
-        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        // Worldbit BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
-        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
-        // Worldbit BIP44 coin type is '5'
-        base58Prefixes[EXT_COIN_TYPE]  = boost::assign::list_of(0x80)(0x00)(0x00)(0x05).convert_to_container<std::vector<unsigned char> >();
+        
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,73);  // Worldbit addresses start with 'W'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);  // Worldbit script addresses start with '3'
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,204);  // Worldbit private keys start with '7' or 'X'
+        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >(); // Worldbit BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
+        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >(); // Worldbit BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
+        base58Prefixes[EXT_COIN_TYPE]  = boost::assign::list_of(0x80)(0x00)(0x00)(0x05).convert_to_container<std::vector<unsigned char> >(); // Worldbit BIP44 coin type is '5'
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
@@ -166,9 +159,9 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (  1500, uint256S("0x000000aaf0300f59f49bc3e970bad15c11f961fe2347accffff19d96ec9778e3")),
+            (  0, uint256S("0x000000aaf0300f59f49bc3e970bad15c11f961fe2347accffff19d96ec9778e3")),
             1503604154, // * UNIX timestamp of last checkpoint block
-            100,    // * total number of transactions between genesis and last checkpoint
+            0,    // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             2800        // * estimated number of transactions per day after checkpoint
         };
@@ -235,7 +228,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         vSeeds.push_back(CDNSSeedData("worldbitdot.io",  "testnet-seed.worldbitdot.io"));
-        vSeeds.push_back(CDNSSeedData("masternode.io", "test.dnsseed.masternode.io"));
+        //vSeeds.push_back(CDNSSeedData("masternode.io", "test.dnsseed.masternode.io"));
 
         // Testnet Worldbit addresses start with 'y'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
@@ -252,7 +245,7 @@ public:
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
-        fMiningRequiresPeers = true;
+        fMiningRequiresPeers = false;
         fDefaultConsistencyChecks = false;
         fRequireStandard = false;
         fMineBlocksOnDemand = false;
@@ -265,13 +258,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (    261, uint256S("0x00000c26026d0815a7e2ce4fa270775f61403c040647ff2c3091f99e894a4618"))
-            (   1999, uint256S("0x00000052e538d27fa53693efe6fb6892a0c1d26c0235f599171c48a3cce553b1"))
-            (   2999, uint256S("0x0000024bc3f4f4cb30d29827c13d921ad77d2c6072e586c7f60d83c2722cdcc5"))
-            (  12907, uint256S("0x00000067de20fd6d276ee0839a3187b203accaa5aad04ca5c17c2997e2730e4c"))
-            (  15590, uint256S("0x00000009df8f2ee9c230aef9dad257d82bde20ca83378a208ce5d95d29a78852"))
-            (  65900, uint256S("0x00000063e4e94d75d0dc075e93898444c8ef50655990dfff7c32d92a7efff671"))
-            ( 127618, uint256S("0x0000002104a2c1fc923b0e3b74b1860236fbc2b4479a833c28abaf456ea4e466")),
+            (    0, uint256S("0x0")),
 
             1483076495, // * UNIX timestamp of last checkpoint block
             168590,     // * total number of transactions between genesis and last checkpoint
@@ -308,7 +295,7 @@ public:
         consensus.nMajorityRejectBlockOutdated = 950;
         consensus.nMajorityWindow = 1000;
         consensus.BIP34Height = -1; // BIP34 has not necessarily activated on regtest
-        consensus.BIP34Hash = uint256();
+        consensus.BIP34Hash = uint256("0x0");
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 24 * 60 * 60; // Worldbit: 1 day
         consensus.nPowTargetSpacing = 2.5 * 60; // Worldbit: 2.5 minutes
@@ -349,7 +336,7 @@ public:
 
         checkpointData = (CCheckpointData){
             boost::assign::map_list_of
-            ( 0, uint256S("0x000008ca1832a4baf228eb1553c03d3a2c8e02399550dd6ea8d65cec3ef23d2e")),
+            ( 0, uint256S("0x0")),
             0,
             0,
             0
