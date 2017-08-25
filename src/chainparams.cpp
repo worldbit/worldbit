@@ -295,7 +295,7 @@ public:
         consensus.nMajorityRejectBlockOutdated = 950;
         consensus.nMajorityWindow = 1000;
         consensus.BIP34Height = -1; // BIP34 has not necessarily activated on regtest
-        consensus.BIP34Hash = uint256("0x0");
+        consensus.BIP34Hash = uint256S("0x0");
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 24 * 60 * 60; // Worldbit: 1 day
         consensus.nPowTargetSpacing = 2.5 * 60; // Worldbit: 2.5 minutes
