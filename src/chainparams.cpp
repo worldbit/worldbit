@@ -7,7 +7,7 @@
 
 #include "chainparams.h"
 #include "consensus/merkle.h"
-
+#include "arith_uint256.h"
 #include "tinyformat.h"
 #include "util.h"
 #include "utilstrencodings.h"
@@ -160,7 +160,7 @@ public:
             }
             LogPrintf("genesis.nTime = %u \n",genesis.nTime);
             LogPrintf("genesis.nNonce = %u \n",genesis.nNonce);
-            LogPrintf("min nBit: %08x\n", UintToArith256(params.powLimit).GetCompact());
+            LogPrintf("min nBit: %08x\n", UintToArith256(consensus.powLimit).GetCompact());
             LogPrintf("genesis.hashMerkleRoot = %s\n",genesis.hashMerkleRoot.ToString().c_str());
             LogPrintf("genesis.GetHash = %s\n",genesis.GetHash().ToString().c_str());
             exit(1);
