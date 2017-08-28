@@ -136,10 +136,11 @@ public:
 		if (false)
         {
             LogPrintf("Searching for genesis block...\n");
-            uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
+			arith_uint256 num;
+            uint256 hashTarget = Num().SetCompact(genesis.nBits).getuint256();
             uint256 thash;
             
-           CBigNum bnTarget;
+           Num bnTarget;
             bnTarget.SetCompact(genesis.nBits);
 
            while(1)
