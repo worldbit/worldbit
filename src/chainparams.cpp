@@ -133,42 +133,39 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x"));
         assert(genesis.hashMerkleRoot == uint256S("0x"));
 
-                if (false)
+		
+		
+		
+           // If genesis block hash does not match, then generate new genesis hash.
+    if (block.GetHash() != hashGenesisBlock)
+    {
+        printf("Searching for genesis block...\n");
+        // This will figure out a valid hash and Nonce if you're
+        // creating a different genesis block:
+        uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
+        uint256 thash;
+
+        while(true)
         {
-            LogPrintf("Searching for genesis block...\n");
-                        arith_uint256 num;
-           arith_uint256 hashTarget = num.SetCompact(genesis.nBits);
-           arith_uint256 thash;
-
-           arith_uint256 bnTarget;
-            bnTarget.SetCompact(genesis.nBits);
-
-           while(1)
+            thash = scrypt_blockhash(BEGIN(block.nVersion));
+            if (thash <= hashTarget)
+                break;
+            if ((block.nNonce & 0xFFF) == 0)
             {
-                thash=genesis.GetHash();
-                if ((thash <= hashTarget) && (thash <= bnTarget.getuint256()) )
-                    break;
-                if ((genesis.nNonce & 0xFFF) == 0)
-                {
-                    LogPrintf("nonce %08X: hash = %s (target = %s)\n",genesis.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
-                }
-                ++genesis.nNonce;
-                if (genesis.nNonce == 0)
-                {
-                    LogPrintf("NONCE WRAPPED, incrementing time\n");
-                    ++genesis.nTime;
-                }
+                printf("nonce %08X: hash = %s (target = %s)\n", block.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
             }
-            LogPrintf("genesis.nTime = %u \n",genesis.nTime);
-            LogPrintf("genesis.nNonce = %u \n",genesis.nNonce);
-            LogPrintf("min nBit: %08x\n", UintToArith256(consensus.powLimit).GetCompact());
-            LogPrintf("genesis.hashMerkleRoot = %s\n",genesis.hashMerkleRoot.ToString().c_str());
-            LogPrintf("genesis.GetHash = %s\n",genesis.GetHash().ToString().c_str());
-            exit(1);
-}
-
+            ++block.nNonce;
+            if (block.nNonce == 0)
+            {
+                printf("NONCE WRAPPED, incrementing time\n");
+                ++block.nTime;
+            }
+        }
+        printf("block.nTime = %u \n", block.nTime);
+        printf("block.nNonce = %u \n", block.nNonce);
+        printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
 		
-		
+	// end of genesis generation	
 		
 		
 		
