@@ -34,8 +34,8 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     //genesis.nTime    = nTime;
 	genesis.nTime    = 1503604154;
     genesis.nBits    = nBits;
-    //genesis.nNonce   = nNonce;
-	genesis.nNonce   = 0;
+    genesis.nNonce   = nNonce;
+	//genesis.nNonce   = 0;
     genesis.nVersion = nVersion;
     genesis.vtx.push_back(txNew);
     genesis.hashPrevBlock.SetNull();
