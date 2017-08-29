@@ -135,7 +135,7 @@ public:
 
 
 		
-		if ( false && (genesis.GetHash() != BIP34Hash)) {
+		if ( false && (genesis.GetHash() != consensus.BIP34Hash)) {
 
         // This will figure out a valid hash and Nonce if you're
         // creating a different genesis block:
