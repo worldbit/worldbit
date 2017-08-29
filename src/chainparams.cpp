@@ -29,11 +29,11 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     txNew.vout[0].scriptPubKey = genesisOutputScript;
 
     CBlock genesis;
-    genesis.nTime    = nTime;
-	//genesis.nTime    = 1503604154;
+    //genesis.nTime    = nTime;
+	genesis.nTime    = 1503604154;
     genesis.nBits    = nBits;
-    genesis.nNonce   = nNonce;
-	//genesis.nNonce   = 0;
+    //genesis.nNonce   = nNonce;
+	genesis.nNonce   = 0;
     genesis.nVersion = nVersion;
     genesis.vtx.push_back(txNew);
     genesis.hashPrevBlock.SetNull();
@@ -133,28 +133,28 @@ public:
 
 
 		
-		if ( false && (block.GetHash() != hashGenesisBlock)) {
+		if ( false && (genesis.GetHash() != hashGenesisBlock)) {
 
         // This will figure out a valid hash and Nonce if you're
         // creating a different genesis block:
-            uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
-            while (block.GetHash() > hashTarget)
+            uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
+            while (genesis.GetHash() > hashTarget)
                {
-                   ++block.nNonce;
-                   if (block.nNonce == 0)
+                   ++genesis.nNonce;
+                   if (genesis.nNonce == 0)
                    {
                        printf("NONCE WRAPPED, incrementing time");
-                       ++block.nTime;
+                       ++genesis.nTime;
                    }
                }
         }
 
         //// debug print
-        block.print();
-        printf("block.GetHash() == %s\n", block.GetHash().ToString().c_str());
-        printf("block.hashMerkleRoot == %s\n", block.hashMerkleRoot.ToString().c_str());
-        printf("block.nTime = %u \n", block.nTime);
-        printf("block.nNonce = %u \n", block.nNonce);
+        genesis.print();
+        printf("genesis.GetHash() == %s\n", genesis.GetHash().ToString().c_str());
+        printf("genesis.hashMerkleRoot == %s\n", genesis.hashMerkleRoot.ToString().c_str());
+        printf("genesis.nTime = %u \n", genesis.nTime);
+        printf("genesis.nNonce = %u \n", genesis.nNonce);
 		
 		
 		
