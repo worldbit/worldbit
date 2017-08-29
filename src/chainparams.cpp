@@ -133,14 +133,14 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x"));
         assert(genesis.hashMerkleRoot == uint256S("0x"));
 
-		if (false)
+                if (false)
         {
             LogPrintf("Searching for genesis block...\n");
-			arith_uint256 num;
-            uint256 hashTarget = Num().SetCompact(genesis.nBits).getuint256();
-            uint256 thash;
-            
-           Num bnTarget;
+                        arith_uint256 num;
+           arith_uint256 hashTarget = num.SetCompact(genesis.nBits);
+           arith_uint256 thash;
+
+           arith_uint256 bnTarget;
             bnTarget.SetCompact(genesis.nBits);
 
            while(1)
@@ -166,6 +166,7 @@ public:
             LogPrintf("genesis.GetHash = %s\n",genesis.GetHash().ToString().c_str());
             exit(1);
 }
+
 		
 		
 		
