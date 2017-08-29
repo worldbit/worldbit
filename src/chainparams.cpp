@@ -139,7 +139,7 @@ public:
 
         // This will figure out a valid hash and Nonce if you're
         // creating a different genesis block:
-            hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
+            int hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
             while (genesis.GetHash() > hashTarget)
                {
                    ++genesis.nNonce;
